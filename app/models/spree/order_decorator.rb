@@ -13,7 +13,9 @@ Spree::Order.class_eval do
     end
   end
 end
-
+  def terms_and_conditions
+    Spree::Page.where(:title => "Terms and Conditions").first.body.html_safe
+  end
 # Validate on state change
 Spree::Order.state_machine.before_transition :to => :delivery, :do => :valid_terms_and_conditions?
 
